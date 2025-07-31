@@ -1,15 +1,15 @@
 import pygame
-from pyglet.image.codecs.gif import read_table_based_image
 
 from Draw import Drawable
 
 WIDTH, HEIGHT = 600, 400
 class Ally_tank (Drawable) :
-    def __init__(self, width, height,x: int, y: int) :
+    def __init__(self, width, height,x: int, y: int,screen : pygame.display) :
         self.x = x
         self.y = y
         self.rect = pygame.Rect(0, 0, width, height)
         self.angle = 0
+        self.screen = screen
 
     def set_rotation(self, angle):
         if angle >= 360 :
@@ -40,7 +40,7 @@ class Ally_tank (Drawable) :
     def draw(self):
 
 
-        tank = pygame.image.load("1.jpg")
+        tank = pygame.image.load("ally.jpg")
 
         # Surface pour le carré (plus grand pour éviter les coupures lors de la rotation)
         square_size = 100
@@ -48,7 +48,7 @@ class Ally_tank (Drawable) :
         self.square_rect = self.square_surf.get_rect(center=(WIDTH//2, HEIGHT//2))
 
         # tank
-        screen.blit(tank,(100,100))
+        self.screen.blit(tank,(100,100))
 
         # Faire tourner la surface contenant le carré
         rotated_surf = pygame.transform.rotate(self.square_surf, self.angle)
@@ -57,6 +57,6 @@ class Ally_tank (Drawable) :
         # Afficher la surface tournée sur l’écran principal
         rotated_rect=rotated_rect.move(self.x, self.y)
 
-        screen.blit(rotated_surf, rotated_rect)
+        self.screen.blit(rotated_surf, rotated_rect)
 
 

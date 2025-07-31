@@ -1,10 +1,10 @@
 [project]
-name = "training"
+name = "tank-proj-synced"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "math",
     "pygame>=2.6.1",
+    "pyglet>=2.1.6",
 ]

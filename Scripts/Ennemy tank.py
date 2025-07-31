@@ -43,7 +43,7 @@ class Enemy_tank (Drawable) :
     def draw(self,pygame: pygame, screen: pygame.Surface):
 
 
-        tank = pygame.image.load("/Sprites/pas gentil/1.jpg")
+        tank = pygame.image.load("/Sprites/pas gentil/ally.jpg")
 
         # Surface pour le carré (plus grand pour éviter les coupures lors de la rotation)
         square_size = 100

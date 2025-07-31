@@ -1,5 +1,3 @@
-from pickletools import pyfloat
-
 import pygame
 import math
 
@@ -11,11 +9,11 @@ liste: list[Rectangle] = []
 
 def Remplir_liste (Nombre_de_rectangle: int,screen_width:int,screen_height:int) :
     from random import randint
-    #for i in range(Nombre_de_rectangle):
-    #    rect = Rectangle(50,50,randint(20, 100), randint(20, 100))
-   #     rect.rect.x = randint(0, screen_width - rect.width)
-    #    rect.rect.y = randint(0, screen_height - rect.height)
-     #   liste.append(rect)
+    for i in range(Nombre_de_rectangle):
+        rect = Rectangle(50,50,randint(20, 100), randint(20, 100))
+        rect.rect.x = randint(0, screen_width - rect.width)
+        rect.rect.y = randint(0, screen_height - rect.height)
+        liste.append(rect)
 
 
 
@@ -28,14 +26,14 @@ if __name__ == '__main__':
     square_surf = pygame.Surface((square_size, square_size), pygame.SRCALPHA)
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption("Rotation carrée sur surface séparée")
-    new_ally = Ally_tank(100,100,100,100)
+    new_ally = Ally_tank(100,100,100,100,screen)
     new_ally.set_rotation(40)
 
     clock = pygame.time.Clock()
 
     # Dessiner le carré sur cette surface (rempli en rouge)
     pygame.draw.rect(square_surf, (255, 0, 0), (0, 0, square_size, square_size))
-    Remplir_liste(5, WIDTH, HEIGHT)
+    #Remplir_liste(5, WIDTH, HEIGHT)
 
     angle = 0
 
@@ -49,6 +47,9 @@ if __name__ == '__main__':
 
         # Nettoyer écran principal
         screen.fill((30, 30, 30))
+        rotation = 0
+        rotation += 1
+        Ally_tank.set_rotation(new_ally,rotation)
 
         Ally_tank.draw(new_ally)
 
