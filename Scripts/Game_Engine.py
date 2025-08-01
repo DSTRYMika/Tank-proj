@@ -16,6 +16,7 @@ class Game_Engine :
         self.second_tank = Ally_tank()
         self.clock = pygame.time.Clock()
 
+
     def Run (self) :
         # Dessiner le carré sur cette surface (rempli en rouge)
         pygame.draw.rect(self.square_surf, (255, 0, 0), (0, 0, self.square_size, self.square_size))

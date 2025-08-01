@@ -5,6 +5,7 @@ from Draw import Drawable
 WIDTH,HEIGHT = 600,400
 
 class Ally_tank (Drawable) :
+
     def __init__(self) :
         self.pos_x = 10
         self.pos_y = 10
