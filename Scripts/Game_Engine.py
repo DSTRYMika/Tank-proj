@@ -20,6 +20,14 @@ class Game_Engine :
         builder=LevelBuilder(400,400)
         builder.build_level(self.current_level)
 
+
+    def move_level(self):
+        delta: float = self.clock.tick(60) / 1000
+        drawables=self.current_level.get_drawables()
+        for d in drawables:
+            d.update_position(delta)
+
+
     def draw_level(self):
         drawables=self.current_level.get_drawables()
         for d in drawables:
@@ -44,12 +52,15 @@ class Game_Engine :
                 new_ally.move(-2)
             elif keys[pygame.K_UP]:
                 new_ally.move(+2)
-            new_ally.update_position(self.clock.tick(60) / 1000)
+
+            self.move_level()
             # Nettoyer écran principal
             self.screen.fill((30, 30, 30))
             self.draw_level()
 
             pygame.display.flip()
             self.clock.tick(60)
+
     def Stop (self) :
         pygame.quit()
+
