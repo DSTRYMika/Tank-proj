@@ -1,0 +1,5 @@
+KEY_POS_X = "pos_x"
+KEY_POS_Y = "pos_y"
+KEY_ROT = "rotation"
+KEY_NAME = "name"
+VAL_ALLY= "ally"

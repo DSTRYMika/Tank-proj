@@ -1,10 +1,15 @@
 from typing import Optional
-from pymunk.examples.platformer import width
+
+from Scripts.Ally_tank import Ally_tank
+from Scripts.Draw import Drawable
+from Scripts.Level import Level
 from StateType import StateType
 import random
+from Scripts.FixedStrings import *
+
 
 # Define the grid manager
-class ItemGrid:
+class LevelBuilder :
     def __init__(self, width: int, height: int) -> None:
         self.width = width
         self.height = height
@@ -21,31 +26,38 @@ class ItemGrid:
             return self.grid[y][x]
         return None
 
+    def build_level(self,level: Level) -> None:
+        new_ally: Drawable = Ally_tank()
+        level.add_drawable(VAL_ALLY, 100, 100, new_ally)
+        #self.new_ally.set_rotation(40)
+        #self.second_tank = Ally_tank()
 
-level1 = ItemGrid(10,10)
 
-for y in range(level1.width) :
-    for i in range(level1.height) :
-        x = random.randint(0,100)
-        if x <= 70 :
-            level1.set_item(y,i,StateType.Undefined)
-        if 70 < x <= 90:
-            level1.set_item(y,i,StateType.TRAP)
 
-print_out = ""
-iteration = 1
-for i in range(level1.width) :
-    for y in range(level1.height) :
-        if level1.get_item(i,y) == StateType.Undefined :
-            print_out += "🟢"
-        elif level1.get_item(i,y) == StateType.TRAP :
-            print_out += "🔴"
-        if iteration == 10 :
-            print_out += "\n"
-            iteration = 1
-        else :
-            iteration += 1
-
-print(print_out)
-
-print(level1.get_item(3,9))
+# level1 = ItemGrid(10,10)
+#
+# for y in range(level1.width) :
+#     for i in range(level1.height) :
+#         x = random.randint(0,100)
+#         if x <= 70 :
+#             level1.set_item(y,i,StateType.Undefined)
+#         if 70 < x <= 90:
+#             level1.set_item(y,i,StateType.TRAP)
+#
+# print_out = ""
+# iteration = 1
+# for i in range(level1.width) :
+#     for y in range(level1.height) :
+#         if level1.get_item(i,y) == StateType.Undefined :
+#             print_out += "🟢"
+#         elif level1.get_item(i,y) == StateType.TRAP :
+#             print_out += "🔴"
+#         if iteration == 10 :
+#             print_out += "\n"
+#             iteration = 1
+#         else :
+#             iteration += 1
+#
+# print(print_out)
+#
+# print(level1.get_item(3,9))

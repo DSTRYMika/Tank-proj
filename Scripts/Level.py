@@ -1,20 +1,26 @@
 import pygame
 
+from Scripts.Draw import Drawable
+from Scripts.FixedStrings import *
+
+
 class Level :
     def __init__(self):
-        self.drawables = []
+        self.drawables : list[Drawable] = []
 
-    def add_drawables(self, screen: pygame.Surface,pos : list = [0,0],object: str = None) :
-        obj = dict()
-        obj["screen"] = screen
-        obj["pos"] = pos
-        obj["image"] = object
-        self.drawables.append(obj)
+    def add_drawable(self,name: str, pos_x: int, pos_y: int,drawable: Drawable) :
+        drawable.properties[KEY_NAME] = name
+        drawable.properties[KEY_POS_X] = pos_x
+        drawable.properties[KEY_POS_Y] = pos_y
+        self.drawables.append(drawable)
 
-    def draw_drawables(self) -> None:
-        for obj in self.drawables:
-            screen = obj["screen"]
-            image = obj["image"]
-            pos = obj["pos"]
-            screen.blit(image, pos)
+    def get_drawable(self, name :str) -> Drawable | None:
+        for drawable in self.drawables:
+            if drawable.properties[KEY_NAME] == name:
+                return drawable
+        return None
+
+    def get_drawables(self) :
+        return self.drawables
+
 

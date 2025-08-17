@@ -10,7 +10,7 @@ class Ennemy_tank (Drawable) :
         self.pos_x = 10
         self.pos_y = 10
         self.angle = 0
-        self.tank = pygame.image.load("Ennemy.png")
+        self.tank = pygame.image.load("Ennemy.png") #image needs to be changed
         self.tank_width , self.tank_height = self.tank.get_size()
         self.rect = pygame.Rect(0, 0, self.tank_width, self.tank_height)
         square_size = 200
