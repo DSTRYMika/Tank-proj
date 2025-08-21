@@ -33,8 +33,9 @@ class LevelBuilder:
     def build_level(self, level: Level) -> None:
         new_ally: Drawable = Ally_tank()
         new_enemy: Drawable = Enemy_tank()
+        new_enemy.MoverCall(new_ally.get_position_x(),new_ally.get_position_y())
         level.add_drawable(VAL_ALLY, 100, 100, new_ally)
-        level.add_drawable(VAL_ENEMY, 200, 100, new_enemy)
+        level.add_drawable(VAL_ENEMY, new_enemy.get_position_x(),new_enemy.get_position_y(), new_enemy)
 
         new_trail = Trail(new_ally)
         level.add_drawable("Trail", 100, 100, new_trail)
