@@ -1,15 +1,17 @@
 import pygame
 from Ally_tank import Ally_tank
-from Scripts.FixedStrings import VAL_ALLY
+from Scripts.Draw import Drawable
+from Scripts.FixedStrings import VAL_ALLY, KEY_NAME, KEY_POS_X, KEY_POS_Y
 from Scripts.Level import Level
 from LevelBuilder import LevelBuilder
 
 class Game_Engine :
     def __init__(self):
+        self.DEBUG: bool=False
         self.rotation = 0
         pygame.init()
         pygame.key.set_repeat()
-        self.WIDTH, self.HEIGHT = 600, 400
+        self.WIDTH, self.HEIGHT = 1000, 980
         self.square_size = 100
         self.square_surf = pygame.Surface((self.square_size, self.square_size), pygame.SRCALPHA)
         self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
@@ -29,8 +31,12 @@ class Game_Engine :
 
 
     def draw_level(self):
-        drawables=self.current_level.get_drawables()
+        drawables : list[Drawable]=self.current_level.get_drawables()
+        if self.DEBUG:
+            print("DRAW_DEBUG #  ---- new frame ----")
         for d in drawables:
+            if self.DEBUG:
+                print(f"DRAW_DEBUG # {d.properties[KEY_NAME]}  x={d.properties[KEY_POS_X]}  y={d.properties[KEY_POS_Y]}")
             d.draw(self.screen)
 
     def Run (self) :

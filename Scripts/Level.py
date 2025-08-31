@@ -20,7 +20,7 @@ class Level :
                 return drawable
         return None
 
-    def get_drawables(self) :
+    def get_drawables(self)->list[Drawable]:
         return self.drawables
 
 

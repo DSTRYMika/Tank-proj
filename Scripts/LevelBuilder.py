@@ -31,14 +31,21 @@ class LevelBuilder:
         return None
 
     def build_level(self, level: Level) -> None:
-        new_ally: Drawable = Ally_tank()
-        new_enemy: Drawable = Enemy_tank()
-        new_enemy.MoverCall(new_ally.get_position_x(),new_ally.get_position_y())
+        new_ally: Ally_tank = Ally_tank()
+        new_enemy: Drawable = Enemy_tank(new_ally)
         level.add_drawable(VAL_ALLY, 100, 100, new_ally)
-        level.add_drawable(VAL_ENEMY, new_enemy.get_position_x(),new_enemy.get_position_y(), new_enemy)
+        level.add_drawable(VAL_ENEMY, new_enemy.pget_x(),new_enemy.pget_y(), new_enemy)
 
         new_trail = Trail(new_ally)
+        new_ennemy_trail = Trail(new_enemy)
+        level.add_drawable("Ennemy_trail",0,0,new_ennemy_trail )
         level.add_drawable("Trail", 100, 100, new_trail)
+
+        for i in range(5) :
+            new_enemy : Drawable = Enemy_tank(new_ally)
+            new_ennemy_trail = Trail(new_enemy)
+            level.add_drawable(VAL_ENEMY, new_enemy.pget_x(), new_enemy.pget_y(), new_enemy)
+            level.add_drawable("Ennemy_trail", 0, 0, new_ennemy_trail)
 
         # self.new_ally.set_rotation(40)
         # self.second_tank = Ally_tank()

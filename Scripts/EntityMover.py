@@ -239,7 +239,7 @@ class EntityMover:
         return int(self.x), int(self.y)
 
     def get_orientation(self):
-        return self.current_orientation
+        return 90 - self.current_orientation
 
     def force_position(self, x, y):
         self.x = x

@@ -1,8 +1,10 @@
-import pygame
 import math
+from typing import Optional, Tuple
+
+import pygame
 from pygame import Surface
+
 from Draw import Drawable
-from Level import Level
 from Scripts.FixedStrings import KEY_POS_X, KEY_POS_Y, KEY_ROT
 
 WIDTH, HEIGHT = 600, 400
@@ -24,26 +26,35 @@ class Ally_tank(Drawable):
         self.tank = pygame.image.load("../Sprites/ally.png")
         self.tank_width, self.tank_height = self.tank.get_size()
         self.rect = pygame.Rect(0, 0, self.tank_width, self.tank_height)
-        square_size = 200
-        self.square_surf = pygame.Surface((square_size, square_size), pygame.SRCALPHA)
-        self.square_rect = self.square_surf.get_rect(center=(WIDTH // 2, HEIGHT // 2))
-        self.rotation: float = 0
+        max_edge=max(self.tank_width, self.tank_height)
+        self.square_size = max_edge
+        self.square_surf = pygame.Surface((self.square_size, self.square_size), pygame.SRCALPHA)
+        #self.square_rect = self.square_surf.get_rect(center=(WIDTH // 2, HEIGHT // 2))
         self.frame_until_trail = 10
+
+    def get_trail_emitter(self) -> tuple[int, str] | None:
+        pos_x = self.properties[KEY_POS_X]
+        pos_y = self.properties[KEY_POS_Y]
+        rotation_rad = self.get_rotation() / 180 * math.pi
+        accel_x = -math.sin(rotation_rad) * self.tank_width /2
+        accel_y = -math.cos(rotation_rad) * self.tank_height /2
+        return pos_x+accel_x,pos_y+accel_y
 
     def draw(self, screen: Surface):
         pos_x = self.properties[KEY_POS_X]
         pos_y = self.properties[KEY_POS_Y]
         # tank
-        self.square_surf.blit(self.tank, (self.tank_width / 2, self.tank_height / 2))
+        self.square_surf.blit(self.tank, (self.square_size/2-self.tank_width / 2, self.square_size/2-self.tank_height / 2))
 
         # Faire tourner la surface contenant le carré
         rotated_surf = pygame.transform.rotate(self.square_surf, self.get_rotation())
-        rotated_rect = rotated_surf.get_rect(center=(pos_x, pos_y))
+        size_rotated=rotated_surf.get_size()
+        #rotated_rect = rotated_surf.get_rect(center=(pos_x, pos_y))
 
         # Afficher la surface tournée sur l’écran principal
-        rotated_rect = rotated_rect.move(self.tank_width, self.tank_height)
+        #rotated_rect = rotated_rect.move(self.tank_width, self.tank_height)
 
-        screen.blit(rotated_surf, rotated_rect)
+        screen.blit(rotated_surf,(pos_x-size_rotated[0]/2,pos_y-size_rotated[1]/2))
 
     def move(self, distance: float):
         # Compute acceleration vector (direction based on tank rotation)
