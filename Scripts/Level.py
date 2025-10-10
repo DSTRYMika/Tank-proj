@@ -1,5 +1,3 @@
-import pygame
-
 from Scripts.Draw import Drawable
 from Scripts.FixedStrings import *
 

@@ -41,12 +41,10 @@ class Drawable(ABC):
     def move(self, distance: float):
         pass
 
-    @abstractmethod
     def set_rotation(self, angle):
         self.properties[KEY_ROT] = angle
 
-    @abstractmethod
-    def get_rotation(self):
+    def get_rotation(self) -> float:
         return self.properties[KEY_ROT]
 
     def MoverCall(self, target_x: float, target_y: float()):

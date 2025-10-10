@@ -1,5 +1,4 @@
 import pygame
-from Ally_tank import Ally_tank
 from Scripts.Draw import Drawable
 from Scripts.FixedStrings import VAL_ALLY, KEY_NAME, KEY_POS_X, KEY_POS_Y
 from Scripts.Level import Level
@@ -7,7 +6,7 @@ from LevelBuilder import LevelBuilder
 
 class Game_Engine :
     def __init__(self):
-        self.DEBUG: bool=False
+        self.DEBUG: bool = False
         self.rotation = 0
         pygame.init()
         pygame.key.set_repeat()
@@ -17,9 +16,9 @@ class Game_Engine :
         self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
         pygame.display.set_caption("Rotation carrée sur surface séparée")
         self.clock = pygame.time.Clock()
-        self.current_level=Level()
+        self.current_level = Level()
 
-        builder=LevelBuilder(400,400)
+        builder = LevelBuilder()
         builder.build_level(self.current_level)
 
 
@@ -34,15 +33,15 @@ class Game_Engine :
         drawables : list[Drawable]=self.current_level.get_drawables()
         if self.DEBUG:
             print("DRAW_DEBUG #  ---- new frame ----")
+
         for d in drawables:
             if self.DEBUG:
                 print(f"DRAW_DEBUG # {d.properties[KEY_NAME]}  x={d.properties[KEY_POS_X]}  y={d.properties[KEY_POS_Y]}")
+
             d.draw(self.screen)
 
     def Run (self) :
-        # Dessiner le carré sur cette surface (rempli en rouge)
-        pygame.draw.rect(self.square_surf, (255, 0, 0), (0, 0, self.square_size, self.square_size))
-        # Remplir_liste(5, WIDTH, HEIGHT)
+
         running = True
         new_ally = self.current_level.get_drawable(VAL_ALLY)
         while running:
