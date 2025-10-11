@@ -16,12 +16,13 @@ from Scripts.FixedStrings import *
 class LevelBuilder:
     def __init__(self) -> None:
         self.frame_until_trail = 10
+        self.level: Level
 
     def get_layer(self, name: str) -> Layer:
-        found: Layer| None = level.get_drawable(name)
+        found: Layer| None = self.level.get_drawable(name)
         if not found:
             found = Layer()
-            level.add_drawable(name,0,0,found)
+            self.level.add_drawable(name,0,0,found)
         return found
 
     def layer_bg(self)-> Layer:
@@ -42,20 +43,21 @@ class LevelBuilder:
 
     def build_level(self, level: Level) -> None:
 
+        self.level = level
         new_ally: Ally_tank = Ally_tank()
         new_enemy: Drawable = Enemy_tank(new_ally)
         self.layer_entities().add_drawable(VAL_ALLY, 100, 100, new_ally)
-        level.add_drawable(VAL_ENEMY, new_enemy.pget_x(),new_enemy.pget_y(), new_enemy)
+        self.layer_entities().add_drawable(VAL_ENEMY, new_enemy.pget_x(),new_enemy.pget_y(), new_enemy)
 
         new_trail = Trail(new_ally)
         new_ennemy_trail = Trail(new_enemy)
         fps_counter = Fps_Counter()
-        level.add_drawable("Ennemy_trail",0,0,new_ennemy_trail )
-        level.add_drawable("Trail", 100, 100, new_trail)
-        level.add_drawable("Fps_Counter", 0,0,fps_counter)
+        self.layer_entities().add_drawable("Ennemy_trail",0,0,new_ennemy_trail )
+        self.layer_entities().add_drawable("Trail", 100, 100, new_trail)
+        self.layer_Menu().add_drawable("Fps_Counter", 0,0,fps_counter)
 
         for i in range(5) :
             new_enemy : Drawable = Enemy_tank(new_ally)
             new_ennemy_trail = Trail(new_enemy)
-            level.add_drawable(VAL_ENEMY, new_enemy.pget_x(), new_enemy.pget_y(), new_enemy)
-            level.add_drawable("Ennemy_trail", 0, 0, new_ennemy_trail)
+            self.layer_entities1().add_drawable(VAL_ENEMY, new_enemy.pget_x(), new_enemy.pget_y(), new_enemy)
+            self.layer_entities1().add_drawable("Ennemy_trail", 0, 0, new_ennemy_trail)

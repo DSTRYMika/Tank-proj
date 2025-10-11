@@ -1,5 +1,6 @@
 from Scripts.Draw import Drawable
 from Scripts.FixedStrings import *
+from Scripts.Layer import Layer
 
 
 class Level :
@@ -13,9 +14,16 @@ class Level :
         self.drawables.append(drawable)
 
     def get_drawable(self, name :str) -> Drawable | None:
-        for drawable in self.drawables:
+        return self._get_drawable_from_list(self.drawables,name)
+
+    def _get_drawable_from_list(self,list : list[Drawable], name :str):
+        drawable: Drawable
+        for drawable in list:
             if drawable.properties[KEY_NAME] == name:
                 return drawable
+        for drawable in list:
+            if drawable.has_sub_drawables():
+                return self._get_drawable_from_list(drawable.get_sub_drawables(),name)
         return None
 
     def get_drawables(self)->list[Drawable]:

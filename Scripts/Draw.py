@@ -14,6 +14,12 @@ class Drawable(ABC):
         self.properties[KEY_POS_X] = 0
         self.properties[KEY_POS_Y] = 0
 
+    def has_sub_drawables(self)->  bool:
+        return False
+
+    def get_sub_drawables(self) :
+        raise NotImplementedError()
+
     def pget_x(self) -> int:
         return self.properties[KEY_POS_X]
 

@@ -4,11 +4,17 @@ from Draw import Drawable
 from Scripts.FixedStrings import *
 
 
-class Layer (Drawable) :
+class Layer(Drawable) :
 
     def __init__(self):
         super().__init__()
         self.layer: list[Drawable] = []
+
+    def has_sub_drawables(self)->  bool:
+        return True
+
+    def get_sub_drawables(self) :
+        return self.layer
 
     def draw(self, screen: Surface):
         one: Drawable
