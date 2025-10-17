@@ -56,7 +56,7 @@ class LevelBuilder:
         self.layer_entities().add_drawable("Trail", 100, 100, new_trail)
         self.layer_Menu().add_drawable("Fps_Counter", 0,0,fps_counter)
 
-        for i in range(5) :
+        for i in range(1) :
             new_enemy : Drawable = Enemy_tank(new_ally)
             new_ennemy_trail = Trail(new_enemy)
             self.layer_entities1().add_drawable(VAL_ENEMY, new_enemy.pget_x(), new_enemy.pget_y(), new_enemy)

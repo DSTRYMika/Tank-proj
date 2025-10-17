@@ -1,10 +1,6 @@
-import time
-
 from pygame import Surface
 import pygame
-
 from Draw import Drawable
-import threading
 
 
 class Fps_Counter(Drawable):
