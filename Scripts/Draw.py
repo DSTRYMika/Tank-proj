@@ -11,8 +11,10 @@ class Drawable(ABC):
     def __init__(self):
         self.properties: dict = {}
         self.properties[KEY_ROT] = 0
+        self.properties[DRAWING_ROT] = 0
         self.properties[KEY_POS_X] = 0
         self.properties[KEY_POS_Y] = 0
+
 
     def has_sub_drawables(self)->  bool:
         return False
@@ -49,6 +51,10 @@ class Drawable(ABC):
 
     def set_rotation(self, angle):
         self.properties[KEY_ROT] = angle
+        self.properties[DRAWING_ROT] = (int(self.properties[KEY_ROT]/15)*15)
+
+    def get_drawing_rotation(self) -> int:
+        pass
 
     def get_rotation(self) -> float:
         return self.properties[KEY_ROT]
